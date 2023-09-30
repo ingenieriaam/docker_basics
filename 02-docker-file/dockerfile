@@ -1,0 +1,18 @@
+# Capa 1
+FROM centos:7
+# Capa 2, instala apache, el -y es absolutamente necesario 
+# porque no hay interacciones con el usuario
+# el comando es el que da la documentación de centos
+RUN yum install -y httpd
+# Capa 3, copia archivos desde nuestro sistema a la imagen
+# en este caso copiamos al directorio que apache tiene como default
+COPY beryllium /var/www/html
+# ADD permite agregar desde URL desde internet
+COPY beryllium /var/www/html
+# Capa 4, apache en foreground
+CMD ["apachectl", "-D", "FOREGROUND"]
+
+# Construyo con 
+# docker build -t apache .
+# docker run -d -p 80:80 apache
+

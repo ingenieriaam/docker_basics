@@ -1,0 +1,14 @@
+FROM nginx
+RUN useradd agustin
+COPY fruit /usr/share/nginx/html
+ENV archivo docker
+WORKDIR /usr/share/nginx/html
+EXPOSE 90
+LABEL author="Agustin M. Ortiz"
+USER agustin
+RUN echo "Yo soy $(whoami)" > /tmp/yo.html
+USER root
+RUN cp /tmp/usuario1.html /usr/share/nginx/html/docker.html
+VOLUME "/var/log/nginx"
+# en realidad es el cmd por defecto
+CMD ["nginx", "-g", "daemon off;"]

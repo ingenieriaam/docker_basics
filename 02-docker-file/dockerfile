@@ -34,7 +34,9 @@ VOLUME "/var/www/html"
 # Exponer el puerto
 #EXPOSE 8080
 # Capa 4, apache en foreground
-CMD ["apachectl", "-D", "FOREGROUND"]
+# es un proceso en primer plano que puede ser un script
+COPY run.sh /run.sh
+CMD sh /run.sh
 
 # Construyo con 
 # docker build -t apache .

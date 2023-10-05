@@ -4,15 +4,25 @@ FROM centos:7
 # porque no hay interacciones con el usuario
 # el comando es el que da la documentación de centos
 RUN yum install -y httpd
+# Me situo en un directorio
+WORKDIR /var/www/html
 # Capa 3, copia archivos desde nuestro sistema a la imagen
 # en este caso copiamos al directorio que apache tiene como default
-COPY beryllium /var/www/html
+# el punto hace referencia al directorio actual
+COPY beryllium .
 # ADD permite agregar desde URL desde internet
-COPY beryllium /var/www/html
+# ADD beryllium /var/www/html
+# Variables de entorno
+ENV contenido prueba
+RUN echo $contenido > /var/www/html/prueba.html
+# Exponer el puerto
+EXPOSE 8080
 # Capa 4, apache en foreground
 CMD ["apachectl", "-D", "FOREGROUND"]
 
 # Construyo con 
 # docker build -t apache .
+# Elimino el contenedor previo
+# docker rm -f apache
 # docker run -d -p 80:80 apache
 

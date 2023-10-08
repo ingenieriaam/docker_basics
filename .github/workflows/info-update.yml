@@ -28,7 +28,7 @@ jobs:
         git commit -m "${{ github.event.head_commit.message }}"
 
     - name: Push changes
-      uses: ad-m/github-push-action@master
+      #uses: ad-m/github-push-action@master
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
       run: |

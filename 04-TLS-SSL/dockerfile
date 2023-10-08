@@ -1,0 +1,30 @@
+# docker build -tapache:phpssl .
+# docker run -d -p 443:443 apache:phpssl
+# En el navegador:
+# https://localhost:443
+
+FROM centos:7
+RUN \
+    yum -y install httpd \
+    yum -y install php \
+    yum -y install php-cli php-common \
+    mod_ssl \
+    openssl
+RUN echo "<?php phpinfo(); ?>" > /var/www/html/phpinfo.php
+
+COPY startbootstrap-sb-admin-gh-pages  /var/www/html
+
+# Para solucionar los problemas de visualización de css y js
+RUN cd /var/www/html && \
+    find . -type f -exec chmod 644 {} \; && \
+    find . -type d -exec chmod 755 {} \;
+# generacion de un certificado ssl en la maquina
+# openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout mysitename.key -out mysitename.crt
+# ssl conf sacado de internet
+# Copio las configuraciones y los archivos necesarios
+COPY docker.crt /docker.crt
+COPY docker.key /docker.key
+COPY ssl.conf /etc/httpd/conf.d/default.conf
+# este define el puesto 443
+EXPOSE 443
+CMD apachectl -DFOREGROUND

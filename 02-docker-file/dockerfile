@@ -1,18 +1,46 @@
 # Capa 1
 FROM centos:7
+# Etiquetas con información
+LABEL author="Agustin M. Ortiz"
+LABEL description="Beryllium - 100% Fully Responsive Free HTML5 Bootstrap Template"
+LABEL version="1.0"
 # Capa 2, instala apache, el -y es absolutamente necesario 
 # porque no hay interacciones con el usuario
 # el comando es el que da la documentación de centos
 RUN yum install -y httpd
+# Me situo en un directorio
+WORKDIR /var/www/html
 # Capa 3, copia archivos desde nuestro sistema a la imagen
 # en este caso copiamos al directorio que apache tiene como default
-COPY beryllium /var/www/html
+# el punto hace referencia al directorio actual
+COPY beryllium .
 # ADD permite agregar desde URL desde internet
-COPY beryllium /var/www/html
+# ADD beryllium /var/www/html
+# Usuario default
+RUN echo "$(whoami)" > /var/www/html/usuario1.html
+# Genero un nuevo user y lo declaro
+RUN useradd agus
+# Agus no puede escribir en el directorio actual, asi que solo genera el archivo
+USER agus
+RUN echo "$(whoami)" > /tmp/usuario2.html
+# este si tiene permisos
+USER root
+RUN cp /tmp/usuario2.html /var/www/html/usuario2.html
+# Variables de entorno
+ENV contenido prueba
+RUN echo $contenido > /var/www/html/prueba.html
+# Datos persistentes
+VOLUME "/var/www/html"
+# Exponer el puerto
+#EXPOSE 8080
 # Capa 4, apache en foreground
-CMD ["apachectl", "-D", "FOREGROUND"]
+# es un proceso en primer plano que puede ser un script
+COPY run.sh /run.sh
+CMD sh /run.sh
 
 # Construyo con 
 # docker build -t apache .
+# Elimino el contenedor previo
+# docker rm -f apache
 # docker run -d -p 80:80 apache
 

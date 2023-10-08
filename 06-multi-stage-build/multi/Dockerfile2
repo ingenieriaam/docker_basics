@@ -1,0 +1,18 @@
+# Centos pesa 200MB de base
+FROM centos as test
+# crea un archivo con el peso deseado
+RUN fallocate -l 10M /opt/file1 
+
+RUN fallocate -l 20M /opt/test2
+
+RUN fallocate -l 30M /opt/test3
+# Hasta acá, tengo 260MB
+#--------------------------------------
+# Alpine pesa 4.41MB
+FROM alpine
+# agrego el archivo de 20MB
+COPY --from=test /opt/test2 /opt/myfile
+# En este punto, la img resultante solo
+# pesa cerca de 25MB.
+
+# Es decir, el primer stage es temporal !!!

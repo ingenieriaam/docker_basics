@@ -13,7 +13,8 @@ jobs:
     steps:
  
     - name: Modify README.md
-      run: ./xtras/list-md.sh
+      run: |
+        ./xtras/list-md.sh
 
     - name: Commit changes
       run: |

@@ -1,0 +1,27 @@
+name: Build and Test
+
+on:
+  push:
+    branches:
+      - *
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+ 
+    - name: Modify README.md
+      run: ./xtras/list-md.sh
+
+    - name: Commit changes
+      run: |
+        git config --local user.email "actions@github.com"
+        git config --local user.name "GitHub Actions"
+        git add README.md
+        git commit -m "${{ github.event.head_commit.message }}"
+
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}

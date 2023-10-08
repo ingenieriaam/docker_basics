@@ -31,3 +31,8 @@ jobs:
       uses: ad-m/github-push-action@master
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        branch_name=$(echo "$GITHUB_REF" | grep -oE '[^/]+$')
+        echo $branch_name
+        git pull
+        git push origin $branch_name

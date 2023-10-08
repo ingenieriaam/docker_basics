@@ -28,6 +28,7 @@ jobs:
         git commit -m "${{ github.event.head_commit.message }}"
 
     - name: Push changes
-      uses: ad-m/github-push-action@$(echo "$GITHUB_REF" | grep -oE '[^/]+$')
+      uses: ad-m/github-push-action@master
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
+        BRANCH: ${{ github.ref }}

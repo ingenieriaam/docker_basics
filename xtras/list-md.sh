@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Ruta del archivo en el que se realizarán los cambios
-archivo="../README.md"
+archivo="README.md"
 # Eliminar contenido debajo de la última "___"
 sed -i '/___/,$d' "$archivo"
 

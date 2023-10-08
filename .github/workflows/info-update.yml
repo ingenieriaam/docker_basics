@@ -14,10 +14,10 @@ jobs:
  
     - name: Modify README.md
       run: |
-        cd $(pwd)/xtras
+        cd ./xtras
         tree
         $(pwd)/xtras/list-md.sh
-
+/home/administrador/Documentos/docker_basics/xtras
     - name: Commit changes
       run: |
         git config --local user.email "actions@github.com"

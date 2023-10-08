@@ -7,7 +7,7 @@ sed -i '/___/,$d' "$archivo"
 
 echo "___" >> "$archivo"
 echo "Notas de cada tema:" >> "$archivo"
-for file in */*.md; do
+for file in ./*/*.md; do
   path="$file"
   filename=$(basename "$file")
   filename="${filename%.*}"

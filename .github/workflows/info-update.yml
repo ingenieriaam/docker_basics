@@ -14,8 +14,7 @@ jobs:
  
     - name: Modify README.md
       run: |
-        pwd
-        ./xtras/list-md.sh
+        $(pwd)/xtras/list-md.sh
 
     - name: Commit changes
       run: |

@@ -18,7 +18,6 @@ jobs:
  
     - name: Modify README.md
       run: |
-        cd ..
         pwd
         ls -lah
         xtras/list-md.sh

@@ -28,5 +28,4 @@ Notas de cada tema:
 - [Intro](01-ej-apache-centos/intro.md)
 - [Imagenes](02-docker-file/imagenes.md)
 - [Buenas practicas](03-complete-image/buenas_practicas.md)
-- [Dangling-images](04-TLS-SSL/dangling-images.md)
 - [Dangling images](04-TLS-SSL/dangling_images.md)

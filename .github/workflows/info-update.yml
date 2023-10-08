@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - main
-      - test/cicd
+      - test/cidc
 
 jobs:
   build:

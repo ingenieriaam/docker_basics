@@ -1,3 +1,4 @@
+```bash
 sudo apt update
 sudo apt install apt-transport-https ca-certificates curl software-properties-common
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
@@ -9,3 +10,4 @@ sudo docker run hello-world
 sudo usermod -aG docker <USERNAME>
 sudo chmod 666 /var/run/docker.sock
 sudo service docker restart
+```
